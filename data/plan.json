@@ -1,1 +1,390 @@
-{"test":"from-claude","status":"ok"}
+{
+  "pages": [
+    {
+      "id": 1,
+      "name": "배치안 1",
+      "facilities": [
+        {
+          "id": 1,
+          "type": "chestnut",
+          "x": 100,
+          "y": 60,
+          "w": 100,
+          "h": 110,
+          "count": 1
+        },
+        {
+          "id": 2,
+          "type": "deck_premium",
+          "x": 40,
+          "y": 148,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 3,
+          "type": "deck_premium",
+          "x": 52,
+          "y": 148,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 4,
+          "type": "deck_premium",
+          "x": 64,
+          "y": 148,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 5,
+          "type": "deck_premium",
+          "x": 76,
+          "y": 148,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 6,
+          "type": "deck_premium",
+          "x": 88,
+          "y": 148,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 7,
+          "type": "deck_normal",
+          "x": 40,
+          "y": 160,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 8,
+          "type": "deck_normal",
+          "x": 52,
+          "y": 160,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 9,
+          "type": "deck_normal",
+          "x": 64,
+          "y": 160,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 10,
+          "type": "deck_normal",
+          "x": 76,
+          "y": 160,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 11,
+          "type": "deck_normal",
+          "x": 88,
+          "y": 160,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 12,
+          "type": "deck_normal",
+          "x": 40,
+          "y": 172,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 13,
+          "type": "deck_normal",
+          "x": 52,
+          "y": 172,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 14,
+          "type": "deck_normal",
+          "x": 64,
+          "y": 172,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 15,
+          "type": "deck_normal",
+          "x": 76,
+          "y": 172,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 16,
+          "type": "deck_normal",
+          "x": 88,
+          "y": 172,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 17,
+          "type": "deck_normal",
+          "x": 40,
+          "y": 184,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 18,
+          "type": "deck_normal",
+          "x": 52,
+          "y": 184,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 19,
+          "type": "deck_normal",
+          "x": 64,
+          "y": 184,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 20,
+          "type": "deck_normal",
+          "x": 76,
+          "y": 184,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 21,
+          "type": "deck_normal",
+          "x": 88,
+          "y": 184,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 22,
+          "type": "deck_normal",
+          "x": 40,
+          "y": 196,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 23,
+          "type": "deck_normal",
+          "x": 52,
+          "y": 196,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 24,
+          "type": "deck_normal",
+          "x": 64,
+          "y": 196,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 25,
+          "type": "deck_normal",
+          "x": 76,
+          "y": 196,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 26,
+          "type": "deck_normal",
+          "x": 88,
+          "y": 196,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 27,
+          "type": "deck_normal",
+          "x": 40,
+          "y": 208,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 28,
+          "type": "deck_normal",
+          "x": 52,
+          "y": 208,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 29,
+          "type": "deck_normal",
+          "x": 64,
+          "y": 208,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 30,
+          "type": "deck_normal",
+          "x": 76,
+          "y": 208,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 31,
+          "type": "deck_normal",
+          "x": 88,
+          "y": 208,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 32,
+          "type": "forest_cabin",
+          "x": 120,
+          "y": 202,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 33,
+          "type": "forest_cabin",
+          "x": 140,
+          "y": 202,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 34,
+          "type": "forest_cabin",
+          "x": 160,
+          "y": 202,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 35,
+          "type": "forest_cabin",
+          "x": 130,
+          "y": 217,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 36,
+          "type": "forest_cabin",
+          "x": 155,
+          "y": 217,
+          "w": 6,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 37,
+          "type": "pool",
+          "x": 60,
+          "y": 245,
+          "w": 15,
+          "h": 17,
+          "count": 1
+        },
+        {
+          "id": 38,
+          "type": "sanitation",
+          "x": 82,
+          "y": 248,
+          "w": 10,
+          "h": 8,
+          "count": 1
+        },
+        {
+          "id": 39,
+          "type": "management",
+          "x": 96,
+          "y": 249,
+          "w": 5,
+          "h": 6,
+          "count": 1
+        },
+        {
+          "id": 40,
+          "type": "cafe",
+          "x": 108,
+          "y": 245,
+          "w": 15,
+          "h": 10,
+          "count": 1
+        },
+        {
+          "id": 41,
+          "type": "parking",
+          "x": 70,
+          "y": 263,
+          "w": 80,
+          "h": 18,
+          "count": 1
+        },
+        {
+          "id": 42,
+          "type": "entrance",
+          "x": 160,
+          "y": 282,
+          "w": 55,
+          "h": 8,
+          "count": 1
+        }
+      ],
+      "nextId": 43
+    }
+  ],
+  "currentPageId": 1
+}
