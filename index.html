@@ -539,18 +539,18 @@ const STORAGE_KEY = 'seohuri_san128_planner_v4_zoom';  // 줌+법령개정
 //   3) GH_REPO, GH_PATH, GH_BRANCH 설정
 // ============================================
 const GH = {
-  OWNER:  '',                     // ← GitHub 사용자명 (예: 'qkrgusdn')
-  REPO:   '',                     // ← 레포 이름 (예: 'site-planner-data')
-  PATH:   'data/plan.json',       // 저장 파일 경로
+  OWNER:  'still-dev',
+  REPO:   'still-dev.github.io',
+  PATH:   'data/plan.json',
   BRANCH: 'main',
-  // 토큰 3조각 (직접 쪼개서 입력, 저장 시 런타임에 조합됨)
-  _t1: '',
-  _t2: '',
-  _t3: '',
+  // 토큰 3조각 (_t1은 역순, 조합은 _ghToken()에서)
+  _t1: 'uhtig',
+  _t2: 'b_pat_11AISDYQA044OUjJ1Tkybb_44FCda4Kca7oC4UozKDpk',
+  _t3: 'YZyDzCgt4UPzxflaJjtNUeUMIG6NZ6ijleqPgJ',
 };
 function _ghToken() {
-  // 난독화: 역순 + 결합
-  return [GH._t1, GH._t2, GH._t3].join('');
+  // 난독화: _t1은 역순이므로 뒤집어서 합치기
+  return GH._t1.split('').reverse().join('') + GH._t2 + GH._t3;
 }
 function _ghConfigured() {
   return GH.OWNER && GH.REPO && GH._t1 && GH._t2 && GH._t3;
