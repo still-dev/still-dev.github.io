@@ -1598,14 +1598,44 @@ function exportPNG() {
 // ============================================
 // 초기화
 // ============================================
-const isFirstRun = loadState();
-renderTabs();
-applyViewBox();
-if (isFirstRun) {
-  loadDefault();  // 최초 접속 시 모든 시설 자동 배치
-} else {
-  renderAll();
+async function initApp() {
+  const isFirstRun = loadState();
+  renderTabs();
+  applyViewBox();
+
+  if (isFirstRun) {
+    // 최초 방문: GitHub에서 저장된 기본 상태 먼저 시도
+    if (_ghConfigured()) {
+      try {
+        const url = `https://api.github.com/repos/${GH.OWNER}/${GH.REPO}/contents/${GH.PATH}?ref=${GH.BRANCH}`;
+        const resp = await fetch(url, {
+          headers: {
+            Authorization: `Bearer ${_ghToken()}`,
+            Accept: 'application/vnd.github+json'
+          }
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          const content = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
+          const parsed = JSON.parse(content);
+          if (parsed.pages && parsed.pages.length) {
+            appState = parsed;
+            renderTabs();
+            renderAll();
+            autoSave();  // localStorage에도 저장
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('GitHub 자동 로드 실패, 기본 배치로 대체:', e);
+      }
+    }
+    loadDefault();  // GitHub 로드 실패 시 폴백
+  } else {
+    renderAll();
+  }
 }
+initApp();
 
 </script>
 
