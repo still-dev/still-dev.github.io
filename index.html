@@ -105,7 +105,17 @@
   .canvas-toolbar button:hover { background: #f0eadb; }
   svg#canvas { width: 100%; height: 100%; display: block; background: #f5f2e8; }
 
-  .facility-group { cursor: move; }
+  .facility-group {
+    cursor: move;
+    touch-action: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .facility-group.lp-ready .facility-rect {
+    stroke: var(--accent); stroke-width: 2;
+    filter: drop-shadow(0 2px 6px rgba(200,90,60,0.55));
+  }
   .facility-group:hover .facility-rect { stroke: #fff; stroke-width: 1; }
   .facility-group.selected .facility-rect { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 2; }
   .resize-handle { stroke: #fff; stroke-width: 0.3; }
@@ -1221,6 +1231,108 @@ document.addEventListener('mouseup', () => {
   if (dragState && dragState.moved) autoSave();
   dragState = null;
 });
+
+// ============================================
+// 모바일: 길게 누르기 → 진동 → 시설 이동 (터치)
+// ============================================
+(function setupLongPressDrag() {
+  const LONG_PRESS_MS = 400;
+  const MOVE_CANCEL_PX = 10;
+  let pressTimer = null;
+  let pressStart = null;
+  let activeTouchId = null;
+  let pendingGroup = null;
+
+  function cancelPress() {
+    if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+    if (pendingGroup) pendingGroup.classList.remove('lp-ready');
+    pendingGroup = null;
+    pressStart = null;
+  }
+
+  svg.addEventListener('touchstart', e => {
+    // 멀티터치면 드래그 취소 (핀치 등)
+    if (e.touches.length !== 1) { cancelPress(); return; }
+    const g = e.target.closest('.facility-group');
+    if (!g) return;
+    // 리사이즈 핸들/아이콘 텍스트는 제외
+    if (e.target.classList && e.target.classList.contains('resize-handle')) return;
+    if (e.target.tagName === 'text') return;
+
+    const t = e.touches[0];
+    pressStart = { x: t.clientX, y: t.clientY };
+    activeTouchId = t.identifier;
+    pendingGroup = g;
+
+    pressTimer = setTimeout(() => {
+      pressTimer = null;
+      if (!pendingGroup) return;
+      const id = parseInt(pendingGroup.dataset.id);
+      const f = facilities().find(x => x.id === id);
+      if (!f) return;
+      // 햅틱 피드백
+      if (navigator.vibrate) { try { navigator.vibrate(40); } catch (_) {} }
+      const svgPt = clientToSvg(pressStart.x, pressStart.y);
+      dragState = {
+        id,
+        offsetX: svgPt.x - f.x,
+        offsetY: svgPt.y - f.y,
+        moved: false,
+        touch: true
+      };
+      pendingGroup.classList.add('lp-ready');
+      selectFacility(id);
+    }, LONG_PRESS_MS);
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    let t = null;
+    for (const tt of e.touches) {
+      if (tt.identifier === activeTouchId) { t = tt; break; }
+    }
+    if (!t) return;
+
+    // 길게 누르기 대기 중 움직임 감지 → 취소 (페이지 스크롤/핀치 의도)
+    if (pressTimer && pressStart) {
+      const dx = t.clientX - pressStart.x;
+      const dy = t.clientY - pressStart.y;
+      if (Math.hypot(dx, dy) > MOVE_CANCEL_PX) cancelPress();
+      return;
+    }
+
+    // 터치 드래그 진행 중
+    if (dragState && dragState.touch) {
+      e.preventDefault();
+      const pt = clientToSvg(t.clientX, t.clientY);
+      const f = facilities().find(x => x.id === dragState.id);
+      if (!f) return;
+      f.x = pt.x - dragState.offsetX;
+      f.y = pt.y - dragState.offsetY;
+      dragState.moved = true;
+      renderAll();
+    }
+  }, { passive: false });
+
+  function endTouch(e) {
+    // 우리가 추적하던 터치가 끝났는지 확인
+    let stillActive = false;
+    if (e && e.touches) {
+      for (const tt of e.touches) {
+        if (tt.identifier === activeTouchId) { stillActive = true; break; }
+      }
+    }
+    if (stillActive) return;
+
+    cancelPress();
+    if (dragState && dragState.touch) {
+      if (dragState.moved) autoSave();
+      dragState = null;
+    }
+    activeTouchId = null;
+  }
+  document.addEventListener('touchend', endTouch);
+  document.addEventListener('touchcancel', endTouch);
+})();
 
 // 리사이즈 중 수정 패널 값 동기화
 function syncEditPanel() {
